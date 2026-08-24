@@ -1,0 +1,37 @@
+name: Calendar Web Check
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'calendar_app/**'
+      - '.github/workflows/calendar-web-check.yml'
+  workflow_dispatch:
+
+jobs:
+  build-calendar-web:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: calendar_app
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      - name: Flutter version
+        run: flutter --version
+
+      - name: Get packages
+        run: flutter pub get
+
+      - name: Analyze
+        run: flutter analyze
+
+      - name: Build Chrome/Web
+        run: flutter build web --release
