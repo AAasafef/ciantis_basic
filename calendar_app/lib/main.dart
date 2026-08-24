@@ -12,28 +12,44 @@ class CiantisCalendarApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const ivory = Color(0xFFF5F0E8);
-    const espresso = Color(0xFF342B27);
+    const paper = Color(0xFFF4F0E9);
+    const ink = Color(0xFF24221F);
+    const desktopBackdrop = Color(0xFFE7E0D7);
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'CIANTIS Calendar',
       theme: ThemeData(
         useMaterial3: true,
-        scaffoldBackgroundColor: ivory,
+        scaffoldBackgroundColor: paper,
         colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color(0xFF8C7768),
+          seedColor: const Color(0xFF756C63),
           brightness: Brightness.light,
-          surface: ivory,
+          surface: paper,
         ),
         textTheme: GoogleFonts.manropeTextTheme().apply(
-          bodyColor: espresso,
-          displayColor: espresso,
+          bodyColor: ink,
+          displayColor: ink,
         ),
-        dividerColor: const Color(0x1A342B27),
+        dividerColor: const Color(0x1824221F),
         splashFactory: NoSplash.splashFactory,
         highlightColor: Colors.transparent,
       ),
+      builder: (context, child) {
+        return ColoredBox(
+          color: desktopBackdrop,
+          child: Center(
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 430),
+              child: SizedBox(
+                width: double.infinity,
+                height: double.infinity,
+                child: child,
+              ),
+            ),
+          ),
+        );
+      },
       home: const CalendarScreen(),
     );
   }
