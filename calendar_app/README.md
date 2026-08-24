@@ -23,5 +23,21 @@ Standalone Flutter calendar module based on the approved CIANTIS calendar mockup
 - Persistent local storage with SharedPreferences
 - CIANTIS subject colors for Birthday, Appointment, Meeting, Task, Reminder, Work, School, Family, Travel, Finance, Health, Salon, and Spiritual
 
-## Run
-This folder contains the CIANTIS Calendar source. From `calendar_app`, generate platform folders if needed with `flutter create .`, then run `flutter pub get` and `flutter run`.
+## Chrome-ready setup
+The Flutter web entry files are already included in `web/`.
+
+### Easiest Windows launch
+From the `calendar_app` folder, run:
+
+```powershell
+.\run_chrome.ps1
+```
+
+### Manual launch
+```powershell
+flutter config --enable-web
+flutter pub get
+flutter run -d chrome
+```
+
+A GitHub Actions workflow at `.github/workflows/calendar-web-check.yml` also runs Flutter analyze and a release web build when calendar files change.
